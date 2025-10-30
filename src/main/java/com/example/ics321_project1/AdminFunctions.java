@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+import java.sql.Connection;
+
 public class AdminFunctions {
     public VBox addRace() {
         VBox vbox = new VBox(10); // Spacing between elements
@@ -19,8 +21,29 @@ public class AdminFunctions {
 
         Button btnAddRace = new Button("Add Race");
         btnAddRace.setOnAction(e -> {
-            // Logic to add the race to the database
+            String name = txtRaceName.getText();
+            String track = txtTrackName.getText();
+            String date = txtRaceDate.getText();
+            String time = txtRaceTime.getText();
+
+            String sql = "INSERT INTO Race (race_name, track_name, race_date, race_time) VALUES (?, ?, ?, ?)";
+
+            try (Connection conn = DatabaseConnection.connect();
+                 java.sql.PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setString(1, name);
+                stmt.setString(2, track);
+                stmt.setString(3, date);
+                stmt.setString(4, time);
+                stmt.executeUpdate();
+
+                System.out.println("✅ Race added successfully!");
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
+
 
         vbox.getChildren().addAll(lblRaceName, txtRaceName, lblTrackName, txtTrackName, lblRaceDate, txtRaceDate, lblRaceTime, txtRaceTime, btnAddRace);
         return vbox;
@@ -33,7 +56,7 @@ public class AdminFunctions {
 
         Button btnDelete = new Button("Delete Owner");
         btnDelete.setOnAction(e -> {
-            // Logic to delete the owner from the database
+            //ToDo: Logic to delete an owner
         });
 
         vbox.getChildren().addAll(lblOwnerId, txtOwnerId, btnDelete);
@@ -49,7 +72,7 @@ public class AdminFunctions {
 
         Button btnMove = new Button("Move Horse");
         btnMove.setOnAction(e -> {
-            // Logic to move the horse to a new stable
+            // TODo:Logic to move the horse to a new stable
         });
 
         vbox.getChildren().addAll(lblHorseId, txtHorseId, lblNewStableId, txtNewStableId, btnMove);
@@ -69,7 +92,7 @@ public class AdminFunctions {
 
         Button btnApprove = new Button("Approve Trainer");
         btnApprove.setOnAction(e -> {
-            // Logic to add the trainer to the database
+            // ToDo:Logic to add the trainer to the database
         });
 
         vbox.getChildren().addAll(lblTrainerId, txtTrainerId, lblLastName, txtLastName, lblFirstName, txtFirstName, lblStableId, txtStableId, btnApprove);
