@@ -1,0 +1,78 @@
+/* ======== GLOBAL ======== */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: linear-gradient(to bottom right, #1c1f26, #2d3436);
+    -fx-padding: 20px;
+}
+
+/* ======== TITLE / HEADERS ======== */
+.label {
+    -fx-text-fill: #f1f1f1;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+}
+
+/* ======== BUTTONS ======== */
+.button {
+    -fx-background-color: linear-gradient(to bottom, #3a7bd5, #00d2ff);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: rgba(255, 255, 255, 0.3);
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #4facfe, #00f2fe);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 8, 0, 0, 3);
+    -fx-translate-y: -2px;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(to bottom, #00c6ff, #0072ff);
+    -fx-translate-y: 0px;
+}
+
+/* ======== TEXT FIELDS ======== */
+.text-field {
+    -fx-background-color: #2d3436;
+    -fx-text-fill: #f1f1f1;
+    -fx-prompt-text-fill: #888;
+    -fx-border-color: #555;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8px 10px;
+    -fx-font-size: 13px;
+}
+
+.text-field:focused {
+    -fx-border-color: #00d2ff;
+    -fx-effect: dropshadow(gaussian, rgba(0,210,255,0.4), 5, 0, 0, 1);
+}
+
+/* ======== LAYOUT ENHANCEMENTS ======== */
+.hbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-padding: 15px;
+}
+
+.grid-pane {
+    -fx-hgap: 15px;
+    -fx-vgap: 15px;
+    -fx-alignment: center;
+}
+
+/* ======== CUSTOM CARD STYLE ======== */
+.card {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 10;
+    -fx-padding: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0, 0, 3);
+}
