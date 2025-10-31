@@ -12,6 +12,16 @@
     -fx-font-size: 16px;
 }
 
+.title {
+    -fx-font-size: 22px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.header {
+    -fx-background-color: linear-gradient(to bottom, #3a7bd5, #00d2ff);
+}
+
 /* ======== BUTTONS ======== */
 .button {
     -fx-background-color: linear-gradient(to bottom, #3a7bd5, #00d2ff);
