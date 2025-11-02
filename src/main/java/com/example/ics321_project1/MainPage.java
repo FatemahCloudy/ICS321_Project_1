@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.net.URL;
 
 public class MainPage extends Application {
@@ -19,11 +18,17 @@ public class MainPage extends Application {
         VBox vbox = new VBox(15);
         HBox header = new HBox(20);
         Scene scene = new Scene(vbox, 300, 250);
+        PageNavigator navigator = new PageNavigator(primaryStage);
         Label title = new Label("Horse Racing System");
 
         // Create two buttons
         Button button1 = new Button("Admin");
         Button button2 = new Button("User");
+
+
+        // Set button actions
+        button1.setOnAction(e -> navigator.goToAdminPage());
+        button2.setOnAction(e -> navigator.goToUserPage());
 
         //add header
         header.setAlignment(Pos.CENTER);
