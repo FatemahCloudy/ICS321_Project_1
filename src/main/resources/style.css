@@ -73,6 +73,11 @@
     -fx-padding: 15px;
 }
 
+.vbox {
+    -fx-alignment: center;
+    -fx-padding: 40;
+}
+
 .grid-pane {
     -fx-hgap: 15px;
     -fx-vgap: 15px;
