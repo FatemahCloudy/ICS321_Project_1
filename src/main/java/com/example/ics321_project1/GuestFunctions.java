@@ -13,11 +13,14 @@ import java.sql.ResultSet;
 public class GuestFunctions {
     // 1) Horses (name, age) + trainer name, filtered by Owner last name
     public VBox horsesByOwnerLastNamePane() {
-        VBox root = new VBox(8); root.setPadding(new Insets(10));
+        VBox root = new VBox(10);
         TextField lastName = new TextField(); lastName.setPromptText("Owner last name (e.g., Mohammed)");
         Button search = new Button("Search");
 
         TableView<Row1> table = new TableView<>();
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        table.setPlaceholder(new Label("No data"));
+        VBox.setVgrow(table, Priority.ALWAYS);
         TableColumn<Row1, String> c1 = new TableColumn<>("Horse");
         c1.setCellValueFactory(d -> d.getValue().horseName);
         TableColumn<Row1, String> c2 = new TableColumn<>("Age");
