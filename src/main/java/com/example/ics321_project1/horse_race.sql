@@ -31,6 +31,27 @@ create table RaceResults
 prize	float(10,2),
 primary key (raceId, horseId),
 foreign key(raceId) references Race(raceId), foreign key(horseId) references Horse(horseId));
+
+/* Added by team members */
+CREATE TABLE old_info (
+                          horseId VARCHAR(15),
+                          horseName VARCHAR(15),
+                          age INT,
+                          gender CHAR,
+                          registration INT,
+                          stableId VARCHAR(30)
+);
+
+DELIMITER //
+CREATE TRIGGER after_horse_delete
+    AFTER DELETE ON Horse
+    FOR EACH ROW
+BEGIN
+    INSERT INTO old_info (horseId, horseName, age, gender, registration, stableId)
+    VALUES (OLD.horseId, OLD.horseName, OLD.age, OLD.gender, OLD.registration, OLD.stableId);
+END //
+DELIMITER ;
+
  
 /* Add data to tables. */
 /* Stables first */
@@ -176,3 +197,4 @@ insert into RaceResults values('race35', 'horse19', 'second', 25000);
 insert into RaceResults values('race36', 'horse11', 'first', 100000); 
 insert into RaceResults values('race36', 'horse15', 'second', 80000); 
 insert into RaceResults values('race36', 'horse20', 'third', 50000);
+
