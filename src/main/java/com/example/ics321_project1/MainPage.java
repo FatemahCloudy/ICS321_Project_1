@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.net.URL;
 
+
 public class MainPage extends Application {
 
     @Override
@@ -56,6 +57,7 @@ public class MainPage extends Application {
         primaryStage.setTitle("Horse Racing");
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 
     public static void main(String[] args) {
