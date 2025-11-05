@@ -17,7 +17,7 @@ public class MainPage extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            DatabaseConnection.initialize(); // connect once
+            DatabaseConnection.getConnection(); // connect once
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Failed to connect to the database");

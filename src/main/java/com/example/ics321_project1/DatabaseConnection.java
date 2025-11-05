@@ -6,33 +6,17 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static Connection connection;
+    private static final String URL = "jdbc:mysql://localhost:3306/horse_race?useSSL=false&serverTimezone=UTC";
+    private static final String USER = "root";
+    private static final String PASSWORD = "EngSwe&987";
 
-    // Initialize connection once
-    public static void initialize() throws SQLException {
-        if (connection == null || connection.isClosed()) {
-            String url = "jdbc:mysql://localhost/horse_race";
-            String user = "root";
-            String password = "EngSwe&987";
-            connection = DriverManager.getConnection(url, user, password);
-            System.out.println("✅ Database connected successfully.");
-        }
-    }
-
-    // Get existing connection
     public static Connection getConnection() {
-        return connection;
-    }
-
-    // Close connection on exit
-    public static void close() {
         try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("🔒 Database connection closed.");
-            }
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
+            System.out.println("Cannot connect to the database");
             e.printStackTrace();
+            return null;
         }
     }
 }
