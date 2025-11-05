@@ -40,8 +40,9 @@ public class AdminFunctions {
 
             String sql = "INSERT INTO Race (raceId, raceName, trackName, raceDate, raceTime) VALUES (?, ?, ?, ?, ?)";
 
-            try (Connection conn = DatabaseConnection.connect();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try {
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
 
                 stmt.setString(1, raceId);
                 stmt.setString(2, name);
@@ -50,6 +51,8 @@ public class AdminFunctions {
                 stmt.setString(5, time);
 
                 stmt.executeUpdate();
+                stmt.close();
+
                 showAlert(Alert.AlertType.INFORMATION, "✅ Race added successfully!");
 
             } catch (SQLIntegrityConstraintViolationException ex) {
@@ -60,8 +63,15 @@ public class AdminFunctions {
             }
         });
 
-        vbox.getChildren().addAll(lblRaceId, txtRaceId, lblRaceName, txtRaceName, lblTrackName, txtTrackName,
-                lblRaceDate, txtRaceDate, lblRaceTime, txtRaceTime, btnAddRace);
+        vbox.getChildren().addAll(
+                lblRaceId, txtRaceId,
+                lblRaceName, txtRaceName,
+                lblTrackName, txtTrackName,
+                lblRaceDate, txtRaceDate,
+                lblRaceTime, txtRaceTime,
+                btnAddRace
+        );
+
         return vbox;
     }
 
@@ -83,11 +93,13 @@ public class AdminFunctions {
 
             String callSQL = "{CALL DeleteOwnerAndRelated(?)}";
 
-            try (Connection conn = DatabaseConnection.connect();
-                 CallableStatement stmt = conn.prepareCall(callSQL)) {
+            try {
+                Connection conn = DatabaseConnection.getConnection();
+                CallableStatement stmt = conn.prepareCall(callSQL);
 
                 stmt.setString(1, ownerId);
                 stmt.execute();
+                stmt.close();
 
                 showAlert(Alert.AlertType.INFORMATION, "✅ Owner (ID: " + ownerId + ") deleted successfully.");
 
@@ -127,12 +139,15 @@ public class AdminFunctions {
 
             String sql = "UPDATE Horse SET stableId = ? WHERE horseId = ?";
 
-            try (Connection conn = DatabaseConnection.connect();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try {
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
 
                 stmt.setString(1, newStableId);
                 stmt.setString(2, horseId);
+
                 int rows = stmt.executeUpdate();
+                stmt.close();
 
                 if (rows > 0)
                     showAlert(Alert.AlertType.INFORMATION, "✅ Horse " + horseId + " moved successfully!");
@@ -181,8 +196,9 @@ public class AdminFunctions {
 
             String sql = "INSERT INTO Trainer (trainerId, lname, fname, stableId) VALUES (?, ?, ?, ?)";
 
-            try (Connection conn = DatabaseConnection.connect();
-                 PreparedStatement stmt = conn.prepareStatement(sql)) {
+            try {
+                Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
 
                 stmt.setString(1, trainerId);
                 stmt.setString(2, lname);
@@ -190,6 +206,8 @@ public class AdminFunctions {
                 stmt.setString(4, stableId);
 
                 stmt.executeUpdate();
+                stmt.close();
+
                 showAlert(Alert.AlertType.INFORMATION, "✅ Trainer approved successfully!");
 
             } catch (SQLIntegrityConstraintViolationException ex) {
@@ -200,8 +218,13 @@ public class AdminFunctions {
             }
         });
 
-        vbox.getChildren().addAll(lblTrainerId, txtTrainerId, lblLName, txtLName,
-                lblFName, txtFName, lblStableId, txtStableId, btnApprove);
+        vbox.getChildren().addAll(
+                lblTrainerId, txtTrainerId,
+                lblLName, txtLName,
+                lblFName, txtFName,
+                lblStableId, txtStableId,
+                btnApprove
+        );
         return vbox;
     }
 

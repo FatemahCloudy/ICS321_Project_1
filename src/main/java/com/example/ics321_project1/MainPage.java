@@ -16,6 +16,14 @@ public class MainPage extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        try {
+            DatabaseConnection.initialize(); // connect once
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Failed to connect to the database");
+            return; // stop app if no DB
+        }
+
         VBox vbox = new VBox(15);
         HBox header = new HBox(20);
         Scene scene = new Scene(vbox, 300, 250);
@@ -57,6 +65,7 @@ public class MainPage extends Application {
         primaryStage.setTitle("Horse Racing");
         primaryStage.setScene(scene);
         primaryStage.show();
+
 
     }
 

@@ -2,22 +2,37 @@ package com.example.ics321_project1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://localhost/horse_race";
-    private static final String USER = "root";
-    private static final String PASSWORD = ""; //ToDo: Change it
+    private static Connection connection;
 
-    public static Connection connect() {
+    // Initialize connection once
+    public static void initialize() throws SQLException {
+        if (connection == null || connection.isClosed()) {
+            String url = "jdbc:mysql://localhost/horse_race";
+            String user = "root";
+            String password = "EngSwe&987";
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("✅ Database connected successfully.");
+        }
+    }
+
+    // Get existing connection
+    public static Connection getConnection() {
+        return connection;
+    }
+
+    // Close connection on exit
+    public static void close() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Connected to MySQL successfully!");
-            return conn;
-        } catch (Exception e) {
-            System.err.println("Database connection failed: " + e.getMessage());
-            return null;
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+                System.out.println("🔒 Database connection closed.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
